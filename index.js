@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 10000;
 app.use(cors());
 app.use(express.json());
 
-// Root Route (Fixes "Cannot GET /")
+// Root Route (Prevents "Cannot GET /" error)
 app.get('/', (req, res) => {
   res.json({
     status: 'success',
@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// Health Check Endpoint
+// Health Check
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', uptime: process.uptime() });
 });

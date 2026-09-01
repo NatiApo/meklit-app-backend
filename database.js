@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
 
-// Use custom DATA_DIR on Render if present, otherwise default to local ./db folder
+// Use custom DATA_DIR on Render if set, otherwise default to local ./db folder
 const dbDir = process.env.DATA_DIR || path.join(__dirname, 'db');
 
 if (!fs.existsSync(dbDir)) {
@@ -19,7 +19,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
-// Initialize database tables
+// Create tables on startup
 db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS users (
